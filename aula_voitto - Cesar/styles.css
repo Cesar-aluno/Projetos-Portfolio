@@ -1,12 +1,15 @@
-```css
+
 /* ========================================
    VOITTO CAKES
    Estilo original + layout moderno
+   Responsivo e acessível
 ======================================== */
 
 /* ---------- Variáveis de estilo ---------- */
 
 :root {
+    color-scheme: light;
+
     --text-color: #4e342e;
     --primary-color: #795548;
     --secondary-color: crimson;
@@ -18,7 +21,9 @@
 
 /* ---------- Configurações gerais ---------- */
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -27,6 +32,7 @@ html {
 }
 
 body {
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background-color: burlywood;
@@ -36,9 +42,39 @@ body {
     line-height: 1.6;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: darkred;
+    text-underline-offset: 0.2em;
+    transition: color 0.3s ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+figure:focus-visible {
+    outline: 3px solid darkred;
+    outline-offset: 4px;
+}
+
+/* Evita que conteúdos extensos ultrapassem os containers */
+
+p,
+li,
+figcaption,
+address {
+    overflow-wrap: anywhere;
+}
+
 /* ---------- Cabeçalho ---------- */
 
 .site-header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 30px 20px;
     text-align: center;
 }
@@ -52,25 +88,27 @@ body {
     text-transform: uppercase;
 }
 
-/* Título original do Voitto Cakes */
+/* Título original do VOITTO CAKES */
 
 h1 {
     margin: 10px 0 20px;
     color: crimson;
-    font-family: cursive;
-    font-size: clamp(2.2rem, 6vw, 3rem);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 6vw, 3rem);
     font-weight: bold;
-    letter-spacing: 10px;
-    word-spacing: -20px;
+    letter-spacing: clamp(1px, 1vw, 10px);
+    word-spacing: normal;
     text-decoration: underline wavy palevioletred;
+    text-underline-offset: 6px;
     text-shadow: 3px 3px 5px rgba(80, 0, 0, 0.25);
+    overflow-wrap: anywhere;
 }
 
 .subtitle {
     max-width: 650px;
     margin: 0 auto;
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 /* ---------- Conteúdo principal ---------- */
@@ -88,17 +126,18 @@ section {
 h2,
 h3 {
     color: var(--primary-color);
-    font-family: cursive;
+    font-family: Georgia, "Times New Roman", serif;
     line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 
 h2 {
     margin-bottom: 15px;
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
 }
 
 h3 {
-    font-size: 1.35rem;
+    font-size: clamp(1.2rem, 3vw, 1.35rem);
 }
 
 p {
@@ -124,45 +163,50 @@ p {
 .cake-figure img {
     display: block;
     width: 100%;
-    height: 300px;
+    height: auto;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     transition:
         transform 0.4s ease,
         filter 0.4s ease;
 }
 
-/* Efeito de hover nas imagens */
+/* Efeitos de hover e foco */
 
 .cake-figure:hover,
-.cake-figure:focus {
+.cake-figure:focus-visible,
+.cake-figure:focus-within {
     box-shadow: 0 8px 20px rgba(80, 0, 0, 0.25);
 }
 
 .cake-figure:hover img,
-.cake-figure:focus img {
+.cake-figure:focus-visible img,
+.cake-figure:focus-within img {
     transform: scale(1.05);
     filter: brightness(0.75);
 }
 
-/* Legenda das imagens */
+/* Legendas das imagens */
 
 .cake-figure figcaption {
     position: relative;
     padding: 12px 15px;
     background-color: var(--card-background);
     color: var(--primary-color);
-    font-family: cursive;
+    font-family: Georgia, "Times New Roman", serif;
     font-size: 1rem;
     font-weight: bold;
+    line-height: 1.5;
     transition:
         color 0.3s ease,
         background-color 0.3s ease;
 }
 
-/* Hover original da legenda */
+/* Hover e foco da legenda */
 
 .cake-figure:hover figcaption,
-.cake-figure:focus figcaption {
+.cake-figure:focus-visible figcaption,
+.cake-figure:focus-within figcaption {
     color: crimson;
     background-color: mistyrose;
 }
@@ -170,17 +214,20 @@ p {
 /* Cores específicas para cada bolo */
 
 .cake-figure.chocolate:hover figcaption,
-.cake-figure.chocolate:focus figcaption {
+.cake-figure.chocolate:focus-visible figcaption,
+.cake-figure.chocolate:focus-within figcaption {
     color: saddlebrown;
 }
 
 .cake-figure.laranja:hover figcaption,
-.cake-figure.laranja:focus figcaption {
+.cake-figure.laranja:focus-visible figcaption,
+.cake-figure.laranja:focus-within figcaption {
     color: darkorange;
 }
 
 .cake-figure.limao:hover figcaption,
-.cake-figure.limao:focus figcaption {
+.cake-figure.limao:focus-visible figcaption,
+.cake-figure.limao:focus-within figcaption {
     color: olivedrab;
 }
 
@@ -193,6 +240,7 @@ p {
 /* ---------- Introdução ---------- */
 
 .intro {
+    width: 100%;
     max-width: 800px;
     margin: 35px auto;
     text-align: center;
@@ -225,25 +273,34 @@ p {
 }
 
 .recipe-nav li {
+    min-width: 0;
     margin: 0;
+    padding: 0;
 }
 
 .recipe-nav a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    max-width: 100%;
     padding: 10px 20px;
     background-color: #ffffff;
     color: darkred;
     border: 2px solid palevioletred;
     border-radius: 6px;
     font-weight: bold;
+    line-height: 1.4;
+    text-align: center;
     text-decoration: none;
+    overflow-wrap: anywhere;
     transition:
         color 0.3s ease,
         background-color 0.3s ease,
         transform 0.3s ease;
 }
 
-/* Hover original dos links */
+/* Hover dos links */
 
 .recipe-nav a:hover {
     background-color: plum;
@@ -263,9 +320,11 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 25px;
     align-items: start;
+    margin: 30px 0;
 }
 
 .recipe-content section {
+    min-width: 0;
     margin: 0;
     padding: 22px;
     background-color: var(--card-background);
@@ -287,12 +346,198 @@ p {
 
 .recipe-content li {
     margin-bottom: 8px;
+    padding-left: 2px;
+}
+
+.recipe-content li::marker {
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 /* ---------- Links gerais ---------- */
 
-a {
-    transition: color 0.3s ease;
+a:hover {
+    color: crimson;
 }
 
-a:focus-visible
+a:focus-visible {
+    outline: 3px solid darkred;
+    outline-offset: 4px;
+}
+
+/* ---------- Endereço e contato ---------- */
+
+address {
+    margin-top: 30px;
+    font-style: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+address a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Rodapé centralizado ---------- */
+
+.site-footer {
+    width: 100%;
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    padding: 1.5rem 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- Tablets e celulares ---------- */
+
+@media (max-width: 768px) {
+    .page-content {
+        width: 94%;
+    }
+
+    .recipe-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .recipe-content section {
+        padding: 20px;
+    }
+
+    .cake-figure {
+        max-width: 450px;
+    }
+
+    .recipe-nav ul {
+        gap: 10px;
+    }
+}
+
+/* ---------- Telas pequenas ---------- */
+
+@media (max-width: 480px) {
+    .site-header {
+        padding: 25px 12px;
+    }
+
+    h1 {
+        letter-spacing: 1px;
+        text-underline-offset: 4px;
+    }
+
+    .page-content {
+        width: 100%;
+        padding: 15px 0 30px;
+    }
+
+    section {
+        margin: 24px 0;
+    }
+
+    .intro {
+        padding: 0 8px;
+    }
+
+    .cake-figure {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .cake-figure img {
+        aspect-ratio: 3 / 2;
+    }
+
+    /* Menu vertical para facilitar o toque */
+
+    .recipe-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .recipe-nav li {
+        width: 100%;
+    }
+
+    .recipe-nav a {
+        display: flex;
+        width: 100%;
+        padding: 12px 16px;
+    }
+
+    .recipe-content {
+        gap: 16px;
+    }
+
+    .recipe-content section {
+        padding: 16px;
+    }
+
+    /* Mantém as legendas visíveis em dispositivos móveis */
+
+    .cake-figure figcaption {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .site-footer {
+        margin-top: 2rem;
+        padding: 1.25rem 0.5rem;
+    }
+}
+
+/* ---------- Telas muito estreitas ---------- */
+
+@media (max-width: 360px) {
+    body {
+        font-size: 15px;
+    }
+
+    .site-header {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    h1 {
+        font-size: 1.9rem;
+        letter-spacing: 0;
+    }
+
+    .recipe-content section {
+        padding: 12px;
+    }
+
+    .recipe-content ul,
+    .recipe-content ol {
+        padding-left: 20px;
+    }
+
+    .recipe-nav a {
+        padding: 10px;
+    }
+}
+
+/* ---------- Acessibilidade: movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
