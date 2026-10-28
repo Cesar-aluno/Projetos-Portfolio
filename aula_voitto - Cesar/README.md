@@ -21,4 +21,4 @@ Abra o arquivo `index.html` no navegador. Para que as fotografias apareçam, man
 
 ## Observação
 
-Este projeto foi criado para estudo e portfólio. Confirme os direitos de uso das imagens antes de publicar o site.
+Este projeto foi criado para estudo e portfólio. 
